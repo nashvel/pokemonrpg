@@ -21,12 +21,12 @@ A pixel-art styled web-based Pokémon RPG built with React, Tailwind CSS, and Vi
 
 1. Clone the repository:
    ```
-   git clone https://github.com/yourusername/pokemon-web-rpg.git
+   git clone https://github.com/nashvel/pokemonrpg.git
    ```
 
 2. Navigate to the frontend directory:
    ```
-   cd pokemon/frontend
+   cd pokemonrpg/frontend
    ```
 
 3. Install dependencies:
@@ -134,3 +134,4 @@ The character customization system features:
 This is a fan project not affiliated with Nintendo or The Pokémon Company. Pokémon and all related media are property of Nintendo, Game Freak, and The Pokémon Company.
 
 Created by Nacht
+Looking for collaborators
