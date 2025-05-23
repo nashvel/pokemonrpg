@@ -120,15 +120,6 @@ The character customization system features:
 - Outfit choices
 - Starter Pokémon selection based on region
 
-## 📝 License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## 🙏 Acknowledgments
-
-- Pokémon sprites from [Bulbagarden Archives](https://archives.bulbagarden.net/)
-- Sound effects from various open-source game resources
-- Inspiration from the classic Pokémon games by Game Freak and Nintendo
 
 ## 🔮 Future Plans
 
