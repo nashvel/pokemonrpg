@@ -1,0 +1,388 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom Colors */
+:root {
+  --pokemon-red: #ff3e3e;
+  --pokemon-blue: #3e66ff;
+  --pokemon-yellow: #ffde3e;
+  --pokemon-green: #3eff6e;
+  --grass-light: #8ade77;
+  --grass-dark: #5aa147;
+  --water-light: #77bade;
+  --water-dark: #4779a1;
+  --rock-light: #d3bc8d;
+  --rock-dark: #a18d67;
+  --cave-light: #9c8f8f;
+  --cave-dark: #635a5a;
+}
+
+@layer base {
+  body {
+    @apply font-sans bg-gray-100 text-gray-900;
+    image-rendering: pixelated;
+  }
+  
+  .pixel-font {
+    font-family: 'Press Start 2P', cursive;
+    letter-spacing: 0.05em;
+    line-height: 1.5;
+  }
+}
+
+@layer components {
+  /* Pixel Art Styling */
+  .pixel-font {
+    font-family: 'Press Start 2P', monospace;
+    text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.2);
+    letter-spacing: 0.5px;
+  }
+
+  .pixelated {
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+  }
+
+  .pixel-border {
+    border: 4px solid #2d2d2d;
+    box-shadow: inset -4px -4px 0 0 rgba(0,0,0,0.2), 4px 4px 0 0 rgba(0,0,0,0.3);
+    position: relative;
+  }
+  
+  .pixel-border-sm {
+    border: 3px solid #2d2d2d;
+    box-shadow: inset -2px -2px 0 0 rgba(0,0,0,0.2), 2px 2px 0 0 rgba(0,0,0,0.3);
+    position: relative;
+  }
+
+  .pixel-border-inset {
+    border: 3px solid #2d2d2d;
+    box-shadow: inset 2px 2px 0 0 rgba(0,0,0,0.3);
+    position: relative;
+  }
+
+  .pixel-border-selected {
+    border: 3px solid var(--pokemon-blue);
+    box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--pokemon-blue);
+    position: relative;
+  }
+
+  /* Pixel Game Tiled Backgrounds */
+  .pixel-bg-pattern {
+    background-color: #f9f9f9;
+    background-image: 
+      linear-gradient(rgba(200, 200, 200, 0.2) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(200, 200, 200, 0.2) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+  
+  /* Grass Terrain */
+  .pixel-bg-grass {
+    background-color: var(--grass-light);
+    background-image: 
+      repeating-linear-gradient(45deg, var(--grass-dark) 0, var(--grass-dark) 4px, transparent 4px, transparent 8px),
+      repeating-linear-gradient(-45deg, var(--grass-dark) 0, var(--grass-dark) 4px, transparent 4px, transparent 8px);
+    background-size: 16px 16px;
+    background-position: 0 0, 8px 8px;
+    image-rendering: pixelated;
+  }
+  
+  /* Water Terrain */
+  .pixel-bg-water {
+    background-color: var(--water-light);
+    background-image: 
+      linear-gradient(90deg, var(--water-dark) 2px, transparent 2px),
+      linear-gradient(var(--water-dark) 2px, transparent 2px);
+    background-size: 16px 16px;
+    position: relative;
+    overflow: hidden;
+    image-rendering: pixelated;
+  }
+  
+  .pixel-bg-water::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+      linear-gradient(135deg, rgba(255,255,255,0.2) 25%, transparent 25%),
+      linear-gradient(225deg, rgba(255,255,255,0.2) 25%, transparent 25%);
+    background-size: 16px 16px;
+    background-position: 0 0;
+    animation: water-animation 2s linear infinite;
+    image-rendering: pixelated;
+  }
+  
+  /* Rock/Mountain Terrain */
+  .pixel-bg-rock {
+    background-color: var(--rock-light);
+    background-image: 
+      radial-gradient(circle, var(--rock-dark) 2px, transparent 2px),
+      radial-gradient(circle, var(--rock-dark) 2px, transparent 2px);
+    background-size: 16px 16px;
+    background-position: 0 0, 8px 8px;
+    image-rendering: pixelated;
+  }
+  
+  /* Cave/Dungeon Terrain */
+  .pixel-bg-cave {
+    background-color: var(--cave-dark);
+    background-image: 
+      linear-gradient(45deg, var(--cave-light) 25%, transparent 25%),
+      linear-gradient(-45deg, var(--cave-light) 25%, transparent 25%);
+    background-size: 8px 8px;
+    image-rendering: pixelated;
+  }
+  
+  /* Pokemon Center Pattern */
+  .pixel-bg-center {
+    background-color: #f8f8f8;
+    background-image: 
+      linear-gradient(45deg, #ffcdd2 25%, transparent 25%), 
+      linear-gradient(-45deg, #ffcdd2 25%, transparent 25%);
+    background-size: 16px 16px;
+    image-rendering: pixelated;
+  }
+  
+  /* Route Path Pattern */
+  .pixel-bg-route {
+    background-color: #c2b280;
+    background-image: 
+      linear-gradient(90deg, rgba(0,0,0,0.1) 1px, transparent 1px),
+      linear-gradient(rgba(0,0,0,0.1) 1px, transparent 1px),
+      linear-gradient(45deg, rgba(0,0,0,0.1) 25%, transparent 25%);
+    background-size: 16px 16px, 16px 16px, 32px 32px;
+    image-rendering: pixelated;
+  }
+  
+  /* Battle Background Pattern */
+  .pixel-bg-battle {
+    background-color: #4a4a4a;
+    background-image: 
+      radial-gradient(circle, #5a5a5a 4px, transparent 4px),
+      radial-gradient(circle, #5a5a5a 4px, transparent 4px);
+    background-size: 24px 24px;
+    background-position: 0 0, 12px 12px;
+    position: relative;
+    overflow: hidden;
+    image-rendering: pixelated;
+  }
+  
+  .pixel-bg-battle::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: linear-gradient(to right, transparent, rgba(255,255,255,0.1), transparent);
+    animation: battle-shine 3s linear infinite;
+    transform: skewX(-45deg);
+  }
+  
+  @keyframes battle-shine {
+    0% { transform: translateX(-100%) skewX(-45deg); }
+    100% { transform: translateX(200%) skewX(-45deg); }
+  }
+
+  .pixel-bg-blue {
+    background-color: var(--pokemon-blue);
+    background-image: 
+      linear-gradient(rgba(255, 255, 255, 0.1) 2px, transparent 2px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.1) 2px, transparent 2px);
+    background-size: 32px 32px;
+  }
+
+  .pixel-bg-red {
+    background-color: var(--pokemon-red);
+    background-image: 
+      linear-gradient(rgba(255, 255, 255, 0.1) 2px, transparent 2px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.1) 2px, transparent 2px);
+    background-size: 32px 32px;
+  }
+  
+  /* Animation Classes */
+  @keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+  }
+
+  @keyframes float-slow {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-5px); }
+    100% { transform: translateY(0px); }
+  }
+  
+  @keyframes water-animation {
+    0% { background-position: 0 0; }
+    100% { background-position: 16px 16px; }
+  }
+  
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .animate-float-slow {
+    animation: float-slow 5s ease-in-out infinite;
+  }
+  
+  .btn {
+    @apply px-4 py-2 rounded-lg font-semibold transition-colors duration-300;
+  }
+  
+  .btn-primary {
+    @apply bg-pokemon-red text-white hover:bg-red-700;
+  }
+  
+  .btn-secondary {
+    @apply bg-pokemon-blue text-white hover:bg-blue-700;
+  }
+  
+  .btn-yellow {
+    @apply bg-pokemon-yellow text-gray-900 hover:bg-yellow-500;
+  }
+  
+  .pixel-btn-yellow {
+    background-color: var(--pokemon-yellow);
+    color: #2d2d2d;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 14px;
+    padding: 8px 16px;
+    border: 3px solid #2d2d2d;
+    box-shadow: inset -3px -3px 0 0 #d4b72e, 3px 3px 0 0 rgba(0,0,0,0.5);
+    transition: all 0.1s;
+    text-transform: uppercase;
+  }
+
+  .pixel-btn-yellow:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: inset -3px -3px 0 0 #d4b72e, 5px 5px 0 0 rgba(0,0,0,0.5);
+  }
+
+  .pixel-btn-yellow:active {
+    transform: translate(2px, 2px);
+    box-shadow: inset -1px -1px 0 0 #d4b72e, 0px 0px 0 0 rgba(0,0,0,0.5);
+  }
+
+  .input-field {
+    @apply w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pokemon-blue focus:border-transparent;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 12px;
+  }
+  
+  .card {
+    @apply bg-white rounded-lg shadow-md overflow-hidden;
+  }
+  
+  .pokemon-title {
+    @apply text-3xl font-bold text-center text-pokemon-blue mb-4;
+  }
+}
+
+/* Custom animations */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+.typing-animation {
+  overflow: hidden;
+  white-space: nowrap;
+  animation: typing 3.5s steps(40, end);
+}
+
+/* Pixelated background patterns */
+.pixel-bg {
+  background-color: #3c5aa6;
+  background-image: url("data:image/svg+xml,%3Csvg width='32' height='32' viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h4v4H0V0zm8 0h4v4H8V0zm8 0h4v4h-4V0zm8 0h4v4h-4V0zm4 4h4v4h-4V4zm0 8h4v4h-4v-4zm0 8h4v4h-4v-4zM4 4h4v4H4V4zm8 0h4v4h-4V4zm8 0h4v4h-4V4zm0 8h4v4h-4v-4zm0 8h4v4h-4v-4zm-8-8h4v4h-4v-4zm-8 0h4v4H4v-4zm8 8h4v4h-4v-4zm-8 0h4v4H4v-4z' fill='%23ffffff' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+  background-size: 32px 32px;
+}
+
+.pixel-bg-green {
+  background-color: #2a9d4a;
+  background-image: url("data:image/svg+xml,%3Csvg width='32' height='32' viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h4v4H0V0zm8 0h4v4H8V0zm8 0h4v4h-4V0zm8 0h4v4h-4V0zm4 4h4v4h-4V4zm0 8h4v4h-4v-4zm0 8h4v4h-4v-4zM4 4h4v4H4V4zm8 0h4v4h-4V4zm8 0h4v4h-4V4zm0 8h4v4h-4v-4zm0 8h4v4h-4v-4zm-8-8h4v4h-4v-4zm-8 0h4v4H4v-4zm8 8h4v4h-4v-4zm-8 0h4v4H4v-4z' fill='%23ffffff' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+  background-size: 32px 32px;
+}
+
+.pixel-bg-red {
+  background-color: #FF0000;
+  background-image: url("data:image/svg+xml,%3Csvg width='32' height='32' viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h4v4H0V0zm8 0h4v4H8V0zm8 0h4v4h-4V0zm8 0h4v4h-4V0zm4 4h4v4h-4V4zm0 8h4v4h-4v-4zm0 8h4v4h-4v-4zM4 4h4v4H4V4zm8 0h4v4h-4V4zm8 0h4v4h-4V4zm0 8h4v4h-4v-4zm0 8h4v4h-4v-4zm-8-8h4v4h-4v-4zm-8 0h4v4H4v-4zm8 8h4v4h-4v-4zm-8 0h4v4H4v-4z' fill='%23ffffff' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+  background-size: 32px 32px;
+}
+
+.pixel-border {
+  border-style: solid;
+  border-width: 4px;
+  border-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h8v8H0V0zm16 0h8v8h-8V0zm0 16h8v8h-8v-8zM0 16h8v8H0v-8z' fill='%23000000' fill-opacity='0.9' fill-rule='evenodd'/%3E%3C/svg%3E") 8 stretch;
+  image-rendering: pixelated;
+}
+
+.dialog-box {
+  @apply bg-white rounded-lg p-6 shadow-lg;
+  border-style: solid;
+  border-width: 4px;
+  border-color: #000;
+  position: relative;
+}
+
+.dialog-box::before {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  border: 2px solid #fff;
+  border-radius: 12px;
+  pointer-events: none;
+}
+
+.pixel-btn {
+  @apply px-4 py-2 font-bold text-white;
+  background-color: #ff0000;
+  border: 4px solid #000;
+  box-shadow: 0 4px 0 #000;
+  transform: translateY(-2px);
+  transition: transform 0.1s;
+  image-rendering: pixelated;
+}
+
+.pixel-btn:hover {
+  transform: translateY(0);
+  box-shadow: 0 2px 0 #000;
+}
+
+.pixel-btn:active {
+  transform: translateY(2px);
+  box-shadow: 0 0 0 #000;
+}
+
+.pokeball-pattern {
+  background-color: #ffffff;
+  background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ff0000' fill-opacity='0.15' fill-rule='evenodd'%3E%3Ccircle cx='20' cy='20' r='10'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 40px 40px;
+}
